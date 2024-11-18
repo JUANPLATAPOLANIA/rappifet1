@@ -1,0 +1,36 @@
+ion-content.full-image {
+  --background: url('/assets/login.png') no-repeat center center / cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;  
+  align-items: center;
+  height: 100vh;  
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+img {
+  width: 150px;
+  height: auto;
+}
+
+.button-container {
+  position: absolute;
+  bottom: 30px;  
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  --background: #a5c3b5;
+}
+
+.register-text {
+  font-size: 14px;
+  padding-top: 10px;
+}
