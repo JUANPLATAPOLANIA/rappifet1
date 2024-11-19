@@ -4,57 +4,72 @@ const { Pool } = require('pg');
 const bcrypt = require('bcrypt');
 
 const app = express();
+
 const pool = new Pool({
-  user: 'root',
+  user: 'postgres',
   host: 'localhost',
   database: 'Registro_Ingreso',
-  password: '12345678',
+  password: '03273025',
   port: 5432,
 });
 
 app.use(bodyParser.json());
 
-// Registro
-app.post('/registro', async (req, res) => {
-  const { nombre, correo, password } = req.body;
+app.post('/register', async (req, res) => {
+  const { usuario, contrasena, rol } = req.body;
+
+  // Validar que la contraseña tenga al menos 8 caracteres
+  if (contrasena.length < 8) {
+    return res.status(400).json({ error: 'La contraseña debe tener al menos 8 caracteres' });
+  }
 
   try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const query = 'INSERT INTO usuarios (nombre, correo, password) VALUES ($1, $2, $3)';
-    await pool.query(query, [nombre, correo, hashedPassword]);
-    res.status(201).send('Usuario registrado correctamente');
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Error al registrar usuario');
+    // Encriptar la contraseña antes de almacenarla
+    const hashedPassword = await bcrypt.hash(contrasena, 10);
+
+    // Insertar el usuario en la base de datos
+    const result = await pool.query(
+      'INSERT INTO usuarios (usuario, contrasena, rol) VALUES ($1, $2, $3) RETURNING *',
+      [usuario, hashedPassword, rol]
+    );
+    res.status(201).json(result.rows[0]);
+  } catch (error) {
+    console.error('Error en el registro:', error);
+    res.status(500).json({ error: 'Error al registrar el usuario' });
   }
 });
 
-// Ingreso
+// Endpoint para iniciar sesión
 app.post('/login', async (req, res) => {
-  const { nombre, password } = req.body;
+  const { usuario, contrasena } = req.body;
 
   try {
-    const query = 'SELECT * FROM usuarios WHERE nombre = $1';
-    const result = await pool.query(query, [nombre]);
+    const result = await pool.query(
+      'SELECT * FROM usuarios WHERE usuario = $1',
+      [usuario]
+    );
 
-    if (result.rows.length === 0) {
-      return res.status(401).send('Nombre o contraseña incorrectos');
+    if (result.rows.length > 0) {
+      const user = result.rows[0];
+
+      // Comparar la contraseña ingresada con la contraseña encriptada
+      const match = await bcrypt.compare(contrasena, user.contrasena);
+
+      if (match) {
+        res.json({ success: true, role: user.rol });
+      } else {
+        res.json({ success: false, message: 'Contraseña incorrecta' });
+      }
+    } else {
+      res.json({ success: false, message: 'Usuario no encontrado' });
     }
-
-    const usuario = result.rows[0];
-    const match = await bcrypt.compare(password, usuario.password);
-
-    if (!match) {
-      return res.status(401).send('Nombre o contraseña incorrectos');
-    }
-
-    res.status(200).send('Inicio de sesión exitoso');
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Error al iniciar sesión');
+  } catch (error) {
+    console.error('Error en el inicio de sesión:', error);
+    res.status(500).json({ success: false, message: 'Error en el servidor' });
   }
 });
 
-app.listen(3000, () => {
-  console.log('Servidor corriendo en http://localhost:3000');
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });

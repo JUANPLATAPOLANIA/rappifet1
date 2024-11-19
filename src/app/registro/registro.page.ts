@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { NavController, ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
-import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registro',
@@ -8,64 +8,79 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./registro.page.scss'],
 })
 export class RegistroPage {
-  nombre: string = '';
-  correo: string = '';
-  password: string = '';
-  confirmarPassword: string = '';
+  usuario: string = '';
+  contrasena: string = '';
+  confirmarContrasena: string = '';  // Aquí declaramos la propiedad
+  rol: string = ''; 
 
-  constructor(private http: HttpClient, private alertCtrl: AlertController) {}
+  constructor(
+    private navCtrl: NavController,
+    private toastController: ToastController,
+    private http: HttpClient
+  ) {}
 
-  async registrar() {
-    if (!this.nombre || !this.correo || !this.password || !this.confirmarPassword) {
-      await this.mostrarAlerta('Error', 'Todos los campos son obligatorios');
+  goToLogin() {
+    this.navCtrl.navigateForward('/login');
+  }
+
+  async register() {
+    // Validación de la contraseña mínima de 8 caracteres
+    if (this.contrasena.length < 8) {
+      const toast = await this.toastController.create({
+        message: 'La contraseña debe tener al menos 8 caracteres.',
+        duration: 2000,
+        color: 'danger'
+      });
+      toast.present();
       return;
     }
 
-    if (!this.validarCorreo(this.correo)) {
-      await this.mostrarAlerta('Error', 'El correo no es válido');
+    // Validación de contraseñas coincidentes
+    if (this.contrasena !== this.confirmarContrasena) {
+      const toast = await this.toastController.create({
+        message: 'Las contraseñas no coinciden.',
+        duration: 2000,
+        color: 'danger'
+      });
+      toast.present();
       return;
     }
 
-    if (this.password.length < 4 || this.password.length > 8) {
-      await this.mostrarAlerta(
-        'Error',
-        'La contraseña debe tener entre 4 y 8 caracteres'
-      );
-      return;
-    }
-
-    if (this.password !== this.confirmarPassword) {
-      await this.mostrarAlerta('Error', 'Las contraseñas no coinciden');
-      return;
-    }
-
-    const datos = {
-      nombre: this.nombre,
-      correo: this.correo,
-      password: this.password,
+    // Crear el objeto de datos para enviar al servidor
+    const data = {
+      usuario: this.usuario,
+      contrasena: this.contrasena,
+      rol: this.rol
     };
 
-    this.http.post('http://localhost:3000/registro', datos).subscribe(
-      async (res) => {
-        await this.mostrarAlerta('Éxito', 'Usuario registrado correctamente');
-      },
-      async (err) => {
-        await this.mostrarAlerta('Error', 'Ocurrió un error al registrar el usuario');
-      }
-    );
-  }
+    // Enviar datos al servidor
+    this.http.post('http://localhost:3000/register', data)
+      .subscribe(
+        async response => {
+          console.log('Usuario registrado:', response);
 
-  private validarCorreo(correo: string): boolean {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(correo);
-  }
+          // Mostrar mensaje de éxito
+          const toast = await this.toastController.create({
+            message: 'Registro exitoso',
+            duration: 2000,
+            color: 'success'
+          });
+          toast.present();
 
-  private async mostrarAlerta(titulo: string, mensaje: string) {
-    const alert = await this.alertCtrl.create({
-      header: titulo,
-      message: mensaje,
-      buttons: ['OK'],
-    });
-    await alert.present();
+          // Redirigir a la página de login
+          this.navCtrl.navigateForward('/login');
+        },
+        async error => {
+          console.error('Error al registrar:', error);
+
+          // Mostrar mensaje de error
+          const toast = await this.toastController.create({
+            message: 'Error al registrar. Intente nuevamente.',
+            duration: 2000,
+            color: 'danger'
+          });
+          toast.present();
+        }
+      );
   }
 }

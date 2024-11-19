@@ -1,45 +1,81 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class  LoginPage {
+export class LoginPage {
   nombre: string = '';
   password: string = '';
 
-  constructor(private http: HttpClient, private alertCtrl: AlertController) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private toastController: ToastController
+  ) {}
 
   async ingresar() {
+    // Validar que los campos no estén vacíos
     if (!this.nombre || !this.password) {
-      await this.mostrarAlerta('Error', 'Todos los campos son obligatorios');
+      const toast = await this.toastController.create({
+        message: 'Por favor completa todos los campos.',
+        duration: 2000,
+        color: 'danger',
+      });
+      await toast.present();
       return;
     }
 
-    const datos = {
-      nombre: this.nombre,
-      password: this.password,
+    const loginData = {
+      usuario: this.nombre,
+      contrasena: this.password,
     };
 
-    this.http.post('http://localhost:3000/login', datos).subscribe(
-      async (res) => {
-        await this.mostrarAlerta('Éxito', 'Inicio de sesión exitoso');
+    this.http.post('http://localhost:3000/login', loginData).subscribe(
+      async (response: any) => {
+        if (response.success) {
+          const toast = await this.toastController.create({
+            message: 'Inicio de sesión exitoso.',
+            duration: 2000,
+            color: 'success',
+          });
+          await toast.present();
+
+          // Redirigir según el rol del usuario
+          if (response.role === 'admin') {
+            this.router.navigate(['/administrador']);
+          } else if (response.role === 'usuario') {
+            this.router.navigate(['/index']);
+          } else {
+            const toast = await this.toastController.create({
+              message: 'Rol desconocido. Contacte al administrador.',
+              duration: 2000,
+              color: 'warning',
+            });
+            await toast.present();
+          }
+        } else {
+          const toast = await this.toastController.create({
+            message: response.message || 'Usuario o contraseña incorrectos.',
+            duration: 2000,
+            color: 'danger',
+          });
+          await toast.present();
+        }
       },
-      async (err) => {
-        await this.mostrarAlerta('Error', 'Nombre o contraseña incorrectos');
+      async (error) => {
+        console.error('Error en el login:', error);
+        const toast = await this.toastController.create({
+          message: 'Error al conectar con el servidor.',
+          duration: 2000,
+          color: 'danger',
+        });
+        await toast.present();
       }
     );
-  }
-
-  private async mostrarAlerta(titulo: string, mensaje: string) {
-    const alert = await this.alertCtrl.create({
-      header: titulo,
-      message: mensaje,
-      buttons: ['OK'],
-    });
-    await alert.present();
   }
 }
