@@ -22,16 +22,11 @@
       <div class="card-title">
         <h1 class="ion-no-margin">{{food?.titulo}}</h1>
         <p class="ion-no-margin" *ngIf="food?.precio">
-          <sup>$</sup>{{food!.precio | number: '1.0-0'}}
+          <sup>$ </sup>{{food!.precio | number: '1.0-0'}}
         </p>
       </div>
 
-      <!-- Cambia el nombre de clase aquí -->
       <div class="additional-content">
-        <div class="rates">
-          <app-badge icon="time" text="30m"></app-badge>
-          <app-badge icon="star-outline" text="4.5"></app-badge>
-        </div>
       
         <div class="about">
           <h1>Acerca de...</h1>

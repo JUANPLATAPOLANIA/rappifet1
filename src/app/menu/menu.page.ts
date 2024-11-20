@@ -21,7 +21,6 @@ export class MenuPage implements OnInit {
     this.getCategories();
     this.filteredCategories = [...this.categories];
 
-    // Suscripción al Observable de getFoods()
     this.foodService.getFoods().subscribe(
       (foods: Food[]) => {
         this.foods = foods;
@@ -34,12 +33,7 @@ export class MenuPage implements OnInit {
   }
 
   getCategories() {
-    this.categories = [
-      { id: 1, etiqueta: 'Empanadas', imagen: 'assets/empanadas.jpg', activa: true },
-      { id: 2, etiqueta: 'Pasteles', imagen: 'assets/pasteles.jpg', activa: false },
-      { id: 3, etiqueta: 'Helados', imagen: 'assets/helados.jpg', activa: false },
-      { id: 4, etiqueta: 'Jugos', imagen: 'assets/jugos.jpg', activa: true },
-    ];
+    
   }
 
   handleInput(event: any) {
