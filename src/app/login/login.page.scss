@@ -1,11 +1,25 @@
 .login-container {
-    --background: url('/assets/login.png') no-repeat center center / cover;
+    --background: url('/assets/imagenfondo1.png') no-repeat center center / cover;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     position: relative;
   }
+
+
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1; /* Ocupa el espacio central */
+  }
+  
+  img {
+    width: 1000px;
+    height: auto;
+  }
+  
   
   .form-container {
     width: 90%;
