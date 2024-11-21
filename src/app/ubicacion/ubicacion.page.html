@@ -1,13 +1,35 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>ubicacion</ion-title>
+    <ion-title>Ubicación</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">ubicacion</ion-title>
+      <ion-title size="large">Ubicación</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <!-- Contenido de la página -->
+  <div class="location-info">
+    <div class="location-header">
+      <ion-icon name="location-outline" class="location-icon"></ion-icon>
+      <h2>Nos puede encontrar en:</h2>
+    </div>
+    <p class="address">Km 12, Rivera, Huila</p>
+    <p class="description">
+      
+    </p>
+
+   
+    <!-- Botón para abrir Google Maps -->
+    <ion-button 
+      expand="block" 
+      color="primary" 
+      href="https://www.google.com/maps/search/fundacion+escuela+tecnologica+de+neiva/@2.8220386,-75.2971169,14z/data=!3m1!4b1?hl=es&entry=ttu&g_ep=EgoyMDI0MTExOC4wIKXMDSoASAFQAw%3D%3D" 
+      target="_blank">
+      Ver Ubicación en Google Maps
+    </ion-button>
+  </div>
 </ion-content>

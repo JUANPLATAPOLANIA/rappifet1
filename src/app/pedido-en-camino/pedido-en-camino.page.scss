@@ -1,4 +1,4 @@
-.login-container {
+.pedido-container {
     --background: url('/assets/imagenfondo1.png') no-repeat center center / cover;
     display: flex;
     justify-content: center;
@@ -7,19 +7,7 @@
     position: relative;
   }
   
-  .image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-  }
-  
-  img {
-    width: 1000px;
-    height: auto;
-  }
-  
-  .form-container {
+  .message-container {
     width: 90%;
     max-width: 400px;
     padding: 20px;
@@ -28,21 +16,26 @@
     text-align: center;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     position: absolute;
-    top: 55%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
   
-  .login-title {
+  .message-container h2 {
     font-size: 24px;
     font-weight: bold;
     color: #000;
     margin-bottom: 20px;
   }
   
-  .payment-button {
+  .message-container p {
+    font-size: 18px;
+    color: #6e6e6e;
+    margin-bottom: 20px;
+  }
+  
+  .back-button {
     --background: #a5c3b5;
     color: #000;
-    margin: 10px 0;
     border-radius: 20px;
   }

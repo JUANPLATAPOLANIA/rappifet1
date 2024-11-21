@@ -7,7 +7,7 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
-    path: 'home',
+    path: '',
     redirectTo: 'home',
     pathMatch: 'full'
   },
@@ -30,7 +30,8 @@ const routes: Routes = [
   {
     path: 'administrador',
     loadChildren: () => import('./administrador/administrador.module').then( m => m.AdministradorPageModule)
-  },  {
+  },
+  {
     path: 'settings',
     loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
   },
@@ -41,7 +42,23 @@ const routes: Routes = [
   {
     path: 'ubicacion',
     loadChildren: () => import('./ubicacion/ubicacion.module').then( m => m.UbicacionPageModule)
+  },  {
+    path: 'efectivo',
+    loadChildren: () => import('./efectivo/efectivo.module').then( m => m.EfectivoPageModule)
   },
+  {
+    path: 'transferencia',
+    loadChildren: () => import('./transferencia/transferencia.module').then( m => m.TransferenciaPageModule)
+  },
+  {
+    path: 'transferencia2',
+    loadChildren: () => import('./transferencia2/transferencia2.module').then( m => m.Transferencia2PageModule)
+  },
+  {
+    path: 'pedido-en-camino',
+    loadChildren: () => import('./pedido-en-camino/pedido-en-camino.module').then( m => m.PedidoEnCaminoPageModule)
+  },
+
 
 ];
 

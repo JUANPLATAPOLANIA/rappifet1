@@ -1,13 +1,17 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>pagos</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="login-container">
+  <div class="image-container">
+    <img src="/assets/nombre.png" alt="Logo">
+  </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">pagos</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <form class="form-container">
+    <h2 class="login-title">Método de pago</h2>
+
+    <ion-button expand="block" shape="round" class="payment-button" (click)="efectivo()">
+      Efectivo
+    </ion-button>
+
+    <ion-button expand="block" shape="round" class="payment-button" (click)="tranferencia()">
+      Transferencia
+    </ion-button>
+  </form>
 </ion-content>

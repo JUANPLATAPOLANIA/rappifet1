@@ -1,4 +1,4 @@
-.login-container {
+.efectivo-container {
     --background: url('/assets/imagenfondo1.png') no-repeat center center / cover;
     display: flex;
     justify-content: center;
@@ -33,16 +33,31 @@
     transform: translate(-50%, -50%);
   }
   
-  .login-title {
+  .efectivo-title {
     font-size: 24px;
     font-weight: bold;
     color: #000;
     margin-bottom: 20px;
   }
   
-  .payment-button {
+  .efectivo-item {
+    text-align: left;
+    margin: 10px 0;
+    padding-left: 30px;
+  }
+  
+  .efectivo-item label {
+    color: #000;
+  }
+  
+  .efectivo-item ion-input {
+    margin: 5px 0 0;
+    color: #6e6e6e;
+  }
+  
+  .continue-button {
     --background: #a5c3b5;
     color: #000;
-    margin: 10px 0;
     border-radius: 20px;
+    margin-top: 20px;
   }

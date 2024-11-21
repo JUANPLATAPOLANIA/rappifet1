@@ -1,0 +1,26 @@
+<ion-content class="transferencia-container">
+  <div class="image-container">
+    <img src="/assets/nombre.png" alt="Logo">
+  </div>
+
+  <div class="form-container">
+    <h2 class="transferencia-title">Detalles de Transferencia</h2>
+
+    <div class="detalle-item">
+      <strong>Nombre del titular:</strong>
+      <p>{{ titular }}</p>
+    </div>
+
+    <div class="detalle-item">
+      <strong>Número de cuenta:</strong>
+      <p>{{ cuenta }}</p>
+    </div>
+
+    <div class="detalle-item">
+      <strong>Monto a enviar:</strong>
+      <p>${{ monto }}</p>
+    </div>
+
+    <ion-button expand="block" shape="round" class="confirm-button" (click)="continuar()">Continuar</ion-button>
+  </div>
+</ion-content>

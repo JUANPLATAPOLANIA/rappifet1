@@ -13,6 +13,7 @@ export class CartService {
     return this.item$.asObservable();
   }
 
+  
   addToCart(newItem: CartItem) {
     this.item$.next([...this.item$.getValue(), newItem]);
   }

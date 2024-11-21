@@ -17,7 +17,7 @@ export class FoodService {
       { id: 7, titulo: 'Empanadas', precio: 2000, imagen: 'assets/empanadas.jpg', descripcion: 'Deliciosas empanadas de pollo y carne' },
       { id: 8, titulo: 'Helados Caseros', precio: 1000, imagen: 'assets/helados.jpg', descripcion: 'Deliciosos Helados caseros de diferentes sabores como mora,coco que estan listos para refresar tu mañana' },
       { id: 9, titulo: 'Limonada con panela', precio: 3000, imagen: 'assets/jugos.jpg', descripcion: 'Deliciosos jugos para refrescarte con algo natural como la limonada de panela! ' },
-
+      { id: 10, titulo: 'yutad', precio: 5000, imagen: 'assets/jugos.jpg', descripcion: 'Deliciosos jugos para refrescarte con algo natural como la limonada de panela! ' },
     ]);
   }
 
@@ -26,8 +26,8 @@ export class FoodService {
     return new Observable(observer => {
       this.getFoods().subscribe(foods => {
         const food = foods.find((food) => food.id === id); 
-        observer.next(food);  
-        observer.complete(); 
+        observer.next(food);
+        observer.complete();
       });
     });
   }

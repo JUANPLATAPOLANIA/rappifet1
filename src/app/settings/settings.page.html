@@ -1,13 +1,39 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>settings</ion-title>
+    <ion-title>Settings</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding" style="background-color: #28a745;">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">settings</ion-title>
+      <ion-title size="large">Settings</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <!-- Texto de soporte -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title style="text-align: center;">Si deseas más información o soporte, contáctate en las siguientes herramientas de comunicación</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <!-- Lista de Contactos -->
+  <ion-list>
+    <!-- Contacto WhatsApp -->
+    <ion-item>
+      <ion-icon slot="start" name="logo-whatsapp" color="success"></ion-icon>
+      <ion-label>
+        <a href="https://wa.me/573223232588" target="_blank" style="text-decoration: none; color: inherit;">WhatsApp: +57 3223232588</a>
+      </ion-label>
+    </ion-item>
+
+    <!-- Contacto Correo -->
+    <ion-item>
+      <ion-icon slot="start" name="mail-outline" color="primary"></ion-icon>
+      <ion-label>
+        <h3>Correo: juandavidplata251&#64;gmail.com</h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

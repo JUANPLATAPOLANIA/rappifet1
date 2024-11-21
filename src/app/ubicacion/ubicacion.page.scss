@@ -1,0 +1,94 @@
+/* Estilo General de la Página */
+body {
+    font-family: 'Noto Sans', sans-serif;
+    background: linear-gradient(135deg, #6200ea, #f0a5c5); /* Fondo degradado */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  
+  /* Encabezado de la Página */
+  ion-header {
+    --background: transparent;
+    --color: white;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+  
+  /* Encabezado de la Ubicación */
+  .location-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  
+    ion-icon {
+      font-size: 30px;
+      margin-right: 10px;
+      color: #6200ea;
+    }
+  
+    h2 {
+      color: #6200ea;
+      font-size: 1.6rem;
+      font-weight: bold;
+      margin: 0;
+    }
+  }
+  
+  /* Información de la Ubicación */
+  .location-info {
+    text-align: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .address {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .description {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  /* Imagen de la Universidad */
+  .university-image {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    margin-top: 20px;
+    transition: transform 0.3s ease;
+  
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  
+  /* Estilo del Botón de Google Maps */
+  ion-button {
+    --background: #6200ea; /* Fondo morado */
+    --color: white; /* Texto blanco */
+    --border-radius: 8px; /* Bordes redondeados */
+    --box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    margin-top: 20px;
+    text-transform: uppercase;
+  
+    &:hover {
+      --box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+  }

@@ -1,4 +1,4 @@
-.login-container {
+.transferencia-container {
     --background: url('/assets/imagenfondo1.png') no-repeat center center / cover;
     display: flex;
     justify-content: center;
@@ -33,16 +33,31 @@
     transform: translate(-50%, -50%);
   }
   
-  .login-title {
+  .transferencia-title {
     font-size: 24px;
     font-weight: bold;
     color: #000;
     margin-bottom: 20px;
   }
   
-  .payment-button {
+  .detalle-item {
+    text-align: left;
+    margin: 10px 0;
+    padding-left: 30px;
+  }
+  
+  .detalle-item strong {
+    color: #000;
+  }
+  
+  .detalle-item p {
+    margin: 5px 0 0;
+    color: #6e6e6e;
+  }
+  
+  .confirm-button {
     --background: #a5c3b5;
     color: #000;
-    margin: 10px 0;
     border-radius: 20px;
+    margin-top: 20px;
   }
