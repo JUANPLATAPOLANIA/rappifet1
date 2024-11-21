@@ -30,7 +30,19 @@ const routes: Routes = [
   {
     path: 'administrador',
     loadChildren: () => import('./administrador/administrador.module').then( m => m.AdministradorPageModule)
+  },  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
   },
+  {
+    path: 'pagos',
+    loadChildren: () => import('./pagos/pagos.module').then( m => m.PagosPageModule)
+  },
+  {
+    path: 'ubicacion',
+    loadChildren: () => import('./ubicacion/ubicacion.module').then( m => m.UbicacionPageModule)
+  },
+
 ];
 
 @NgModule({
